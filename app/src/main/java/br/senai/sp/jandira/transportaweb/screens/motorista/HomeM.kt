@@ -20,8 +20,12 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -44,21 +48,27 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.transportaweb.R
+import br.senai.sp.jandira.transportaweb.model.Cards
 import br.senai.sp.jandira.transportaweb.model.Viagem
+import br.senai.sp.jandira.transportaweb.repository.CardsRepository
 import br.senai.sp.jandira.transportaweb.screens.LoginM
 import br.senai.sp.jandira.transportaweb.ui.theme.TransportaWebTheme
+import br.senai.sp.jandira.transportaweb.utils.encurtarData
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 
 @Composable
 fun HomeM(controleDeNavegacao: NavHostController) {
 
     //val poppins = FontFamily(Font(R.font.poppins))
+    val cards = CardsRepository().listarTodosOsCards()
 
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFFF61221)
     ) {
-        Column {
+        Column (
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ){
             Column(
                 modifier = Modifier
                     .height(225.dp)
@@ -167,112 +177,62 @@ fun HomeM(controleDeNavegacao: NavHostController) {
                     }
                 }
             }
-            Card (
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 30.dp, start = 18.dp, end = 18.dp)
-                    .height(110.dp)
-                    .background(Color.White, shape = RoundedCornerShape(20.dp)),
-                colors = CardDefaults
-                    .cardColors(
-                        containerColor = Color.Transparent,
-                    ),
-            ){
-                Row (
-                    modifier = Modifier
-                        .fillMaxSize()
-                ){
-                    Column (
+                    .padding(start = 26.dp)
+            ) {
+                items(cards) {
+                    Card(
                         modifier = Modifier
-                            .width(250.dp)
-                            .fillMaxHeight()
-                            .background(Color.Transparent)
-                    ){
-                        Row (
-                            horizontalArrangement = Arrangement.Start,
+                            .width(170.dp)
+                            .height(280.dp)
+                            .padding(top = 30.dp),
+                        shape = RoundedCornerShape(20.dp),
+                        colors = CardDefaults
+                            .cardColors(containerColor = Color.White)
+                    ) {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 16.dp, start = 24.dp),
-                        ){
-                            Box(
+                                .fillMaxSize()
+                                .padding(top = 20.dp)
+                        ) {
+                            Card(
                                 modifier = Modifier
-                                    .width(80.dp)
-                                    .height(25.dp)
-                                    .background(Color.Gray, shape = RoundedCornerShape(4.dp))
-                            ){
-                                Text(
-                                    "Na espera",
-                                    textAlign = TextAlign.Center,
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.SemiBold,
-                                    color = Color.White,
-                                    modifier = Modifier
-                                        .align(Alignment.Center)
-                                )
+                                    .padding(0.dp)
+                                    .size(80.dp),
+                                shape = CircleShape,
+                                border = BorderStroke(2.dp, Color.White)
+                            ) {
+
                             }
                             Text(
-                                "#412-639-JTO",
-                                fontWeight = FontWeight.Bold,
                                 modifier = Modifier
-                                    .padding(start = 8.dp)
+                                    .padding(top = 12.dp),
+                                text = "Equipe",
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 18.sp
                             )
-                        }
-                        Box(
-                            modifier = Modifier
-                                .padding(top = 14.dp, start = 24.dp)
-                                .fillMaxWidth()
-                                .height(2.dp)
-                                .background(color = Color(0xFFDADADA))
-                        ){
-
-                        }
-                        Row (
-                            horizontalArrangement = Arrangement.SpaceAround,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(20.dp)
-                                .padding(top = 4.dp, start = 20.dp)
-                        ){
-                            Text(
-                                "De:  DHL Jandira",
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                            Text(
-                                text = "-"
-                            )
-                            Text(
-                                "Para: GM Guarulhos",
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        }
-                        Row (
-                            horizontalArrangement = Arrangement.SpaceAround,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 20.dp)
-                        ){
-                            Text(
-                                "15/08/2025",
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                            Text(
-                                "15/08/2025",
-                                fontSize = 11.sp,
-                                fontWeight = FontWeight.SemiBold
-                            )
+                            Button (
+                                modifier = Modifier
+                                    .padding(top = 40.dp, start = 15.dp, end = 15.dp)
+                                    .fillMaxWidth()
+                                    .height(40.dp),
+                                shape = RoundedCornerShape(30.dp),
+                                colors = ButtonDefaults
+                                    .buttonColors(Color(0xFFF61221)),
+                                onClick = {}
+                            ) {
+                                Text(
+                                    text = "Acessar",
+                                    fontFamily = FontFamily.Default,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 16.sp,
+                                )
+                            }
                         }
                     }
-                    Image(
-                        painterResource(R.drawable.box),
-                        contentDescription = "Caixa",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .fillMaxSize()
-
-                    )
                 }
             }
         }
@@ -284,51 +244,45 @@ fun HomeM(controleDeNavegacao: NavHostController) {
                     RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
                 )
         ){
-            Column {
-                Row (
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(45.dp)
-                        .padding(start = 20.dp, top = 10.dp, end = 20.dp),
-                    horizontalArrangement = Arrangement.SpaceAround
+            Row (
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
+                    .padding(start = 20.dp, top = 10.dp, end = 20.dp),
+                horizontalArrangement = Arrangement.SpaceAround
+            ){
+                Column (
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ){
                     Image(
                         painterResource(R.drawable.caminhao),
                         contentDescription = "Caminhao",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .width(40.dp)
+                            .size(40.dp)
                             .padding(start = 0.dp)
                     )
+                    Text(
+                        text = "Viagens",
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color(0xFFF61221)
+                    )
+                }
+                Column (
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ){
                     Image(
                         painterResource(R.drawable.perfil),
                         contentDescription = "Caminhao",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .width(42.dp)
+                            .size(42.dp)
                             .padding(start = 0.dp)
-                    )
-                }
-                Row (
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp)
-                        .padding(start = 20.dp, top = 0.dp, end = 20.dp),
-                    horizontalArrangement = Arrangement.SpaceAround
-                ){
-                    Text(
-                        text = "Viagens",
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFFF61221),
-                        modifier = Modifier
-                            .padding(end = 6.dp)
                     )
                     Text(
                         text = "Perfil",
                         fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFFF61221),
-                        modifier = Modifier
-                            .padding(end = 10.dp)
+                        color = Color(0xFFF61221)
                     )
                 }
             }
@@ -375,7 +329,7 @@ fun ViagemCard (viagem: Viagem) {
                             .background(Color.Gray, shape = RoundedCornerShape(4.dp))
                     ){
                         Text(
-                            "Na espera",
+                            viagem.status_entregue,
                             textAlign = TextAlign.Center,
                             fontSize = 11.sp,
                             fontWeight = FontWeight.SemiBold,
@@ -385,7 +339,7 @@ fun ViagemCard (viagem: Viagem) {
                         )
                     }
                     Text(
-                        "#412-639-JTO",
+                        viagem.id_viagem,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier
                             .padding(start = 8.dp)
@@ -408,7 +362,7 @@ fun ViagemCard (viagem: Viagem) {
                         .padding(top = 4.dp, start = 20.dp)
                 ){
                     Text(
-                        "De:  DHL Jandira",
+                        "De: ${viagem.id_partida}",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -416,7 +370,7 @@ fun ViagemCard (viagem: Viagem) {
                         text = "-"
                     )
                     Text(
-                        "Para: GM Guarulhos",
+                        "Para: ${viagem.id_destino}",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -428,12 +382,12 @@ fun ViagemCard (viagem: Viagem) {
                         .padding(start = 20.dp)
                 ){
                     Text(
-                        "15/08/2025",
+                        text = "${encurtarData(viagem.dia_partida)}",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.SemiBold
                     )
                     Text(
-                        "15/08/2025",
+                        "${encurtarData(viagem.dia_chegada)}",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.SemiBold
                     )
