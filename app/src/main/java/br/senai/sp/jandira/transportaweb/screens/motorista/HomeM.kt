@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -30,6 +31,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
@@ -49,18 +54,45 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import br.senai.sp.jandira.transportaweb.R
 import br.senai.sp.jandira.transportaweb.model.Cards
+import br.senai.sp.jandira.transportaweb.model.Results
 import br.senai.sp.jandira.transportaweb.model.Viagem
 import br.senai.sp.jandira.transportaweb.repository.CardsRepository
 import br.senai.sp.jandira.transportaweb.screens.LoginM
+import br.senai.sp.jandira.transportaweb.service.RetrofitFactory
 import br.senai.sp.jandira.transportaweb.ui.theme.TransportaWebTheme
 import br.senai.sp.jandira.transportaweb.utils.encurtarData
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @Composable
-fun HomeM(controleDeNavegacao: NavHostController) {
+fun HomeM(controleNavegacao: NavHostController) {
 
     //val poppins = FontFamily(Font(R.font.poppins))
     val cards = CardsRepository().listarTodosOsCards()
+
+    var viagensList by remember {
+        mutableStateOf(listOf<Viagem>())
+    }
+    
+
+    val viagemCall = RetrofitFactory()
+        .getViagemService()
+        .getAllViagens()
+
+    viagemCall.enqueue(
+        object : Callback<Results>{
+            override fun onResponse(p0: Call<Results>, response: Response<Results>) {
+                viagensList = response.body()!!.results
+            }
+
+            override fun onFailure(p0: Call<Results>, response: Throwable) {
+
+            }
+        }
+    )
+
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -235,6 +267,11 @@ fun HomeM(controleDeNavegacao: NavHostController) {
                     }
                 }
             }
+            LazyColumn() {
+                items(viagensList){
+                    ViagemCard(it, controleNavegacao)
+                }
+            }
         }
         Box(
             modifier = Modifier
@@ -291,7 +328,7 @@ fun HomeM(controleDeNavegacao: NavHostController) {
 }
 
 @Composable
-fun ViagemCard (viagem: Viagem) {
+fun ViagemCard (viagem: Viagem, controleNavegacao: NavHostController) {
 
     val context = LocalContext.current
 
@@ -409,17 +446,17 @@ fun ViagemCard (viagem: Viagem) {
 @Composable
 fun HomePreview() {
     TransportaWebTheme {
-        HomeM(controleDeNavegacao = NavHostController(LocalContext.current))
+        HomeM(controleNavegacao = NavHostController(LocalContext.current))
     }
 }
 
-@Preview
-@Composable
-fun ViagemCardPreview() {
-    TransportaWebTheme {
-        ViagemCard(Viagem())
-    }
-}
+//@Preview
+//@Composable
+//fun ViagemCardPreview() {
+//    TransportaWebTheme {
+//        ViagemCard(Viagem())
+//    }
+//}
 
 //@Preview(showBackground = true)
 //@Composable

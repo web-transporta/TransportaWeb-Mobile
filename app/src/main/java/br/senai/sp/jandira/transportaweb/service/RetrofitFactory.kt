@@ -37,4 +37,10 @@ class RetrofitFactory {
         return retrofitFactory.create(EmpresaService::class.java)
     }
 
+    // ********************************** VIAGEM ********************************** //
+
+    fun getViagemService(): ViagemService{
+        return retrofitFactory.create(ViagemService::class.java)
+    }
+
 }

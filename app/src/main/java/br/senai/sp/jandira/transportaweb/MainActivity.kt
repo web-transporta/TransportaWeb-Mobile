@@ -41,7 +41,7 @@ class   MainActivity : ComponentActivity() {
                 ) {
                     val controleNavegacao = rememberNavController()
                     NavHost(navController = controleNavegacao,
-                        startDestination = "loginMotorista"
+                        startDestination = "homeMotorista"
                     ){
                         // ********************************** MOTORISTA ********************************** //
 
