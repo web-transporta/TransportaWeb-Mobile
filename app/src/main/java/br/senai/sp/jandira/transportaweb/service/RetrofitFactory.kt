@@ -15,26 +15,39 @@ class RetrofitFactory {
 
     // ********************************** MOTORISTA ********************************** //
 
-    fun getMotoristaService(java: Class<MotoristaService>): MotoristaService {
-        return retrofitFactory.create(MotoristaService::class.java)
-    }
-
     fun getMotoristaService(): MotoristaService {
         return retrofitFactory.create(MotoristaService::class.java)
     }
 
-    fun postMotoristaService(): MotoristaService{
+    fun postMotoristaService(): MotoristaService {
         return retrofitFactory.create(MotoristaService::class.java)
     }
 
-    // ********************************** MOTORISTA ********************************** //
+    // ********************************** EMPRESA ********************************** //
 
     fun postEmpresaService(): EmpresaService {
-        return retrofitFactory.create((EmpresaService::class.java))
-    }
-
-    fun getEmpresaService(): EmpresaService{
         return retrofitFactory.create(EmpresaService::class.java)
     }
 
+    fun getEmpresaService(): EmpresaService {
+        return retrofitFactory.create(EmpresaService::class.java)
+    }
+
+    // ********************************** VIAGEM ********************************** //
+
+    fun getViagemService(): ViagemService {
+        return retrofitFactory.create(ViagemService::class.java)
+    }
+
+    // ********************************** VIACEP ********************************** //
+
+    private val viaCepRetrofit = Retrofit
+        .Builder()
+        .baseUrl("https://viacep.com.br/ws/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    fun getViaCepService(): ViaCepService {
+        return viaCepRetrofit.create(ViaCepService::class.java)
+    }
 }

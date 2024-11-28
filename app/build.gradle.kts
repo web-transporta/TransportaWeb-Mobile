@@ -77,4 +77,20 @@ dependencies {
 
     // Coil
     implementation("io.coil-kt:coil-compose:2.7.0")
+
+    implementation(libs.secrets.gradle.plugin)
+    implementation(libs.play.services.maps)
+    // KTX for the Maps SDK for Android library
+    implementation(libs.maps.ktx)
+    // KTX for the Maps SDK for Android Utility Library
+    implementation(libs.maps.utils.ktx)
+
+    implementation(libs.maps.compose)
+    // Google Maps Compose utility library
+
+    implementation(libs.maps.compose.utils)
+    // Google Maps Compose widgets library
+    implementation(libs.maps.compose.widgets)
+    implementation(libs.play.services.location)
+
 }

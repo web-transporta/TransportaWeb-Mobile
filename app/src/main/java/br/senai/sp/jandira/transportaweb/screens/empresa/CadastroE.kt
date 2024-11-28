@@ -323,6 +323,7 @@ fun CadastroE(controleNavegacao: NavHostController) {
 @Composable
 fun CadastroMotoristaPreview() {
     TransportaWebTheme {
+
         // Preview da tela de cadastro
     }
 }

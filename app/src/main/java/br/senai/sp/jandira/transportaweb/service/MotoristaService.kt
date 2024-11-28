@@ -20,6 +20,10 @@ interface MotoristaService {
     @GET("v1/transportaweb/motoristas/{id}")
     fun getMotoristasById(@Path("id") id: Int): Call<Motorista>
 
+    // Retorna um motorista pelo nome. (GET)
+    @GET("v1/transportaweb/motoristas/filtro/{nome}")
+    fun getMotoristasByNome(@Path("nome") nome: String): Call<Motorista>
+
     // Enviar uma (POST)
     @Headers("Content-Type: application/json")
 
