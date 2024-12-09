@@ -2,6 +2,7 @@ package br.senai.sp.jandira.transportaweb.screens.geral
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,13 +45,27 @@ fun Contatos(controleDeNavegacao: NavHostController) {
                 .fillMaxWidth()
                 .padding(top = 20.dp, start = 24.dp)
         ){
-            Image(
-                painterResource(R.drawable.botaob),
-                contentDescription = "Logo",
-                contentScale = ContentScale.Crop,
+            Card (
                 modifier = Modifier
-                    .size(50.dp)
-            )
+                    .clickable {
+                        if (controleDeNavegacao.previousBackStackEntry != null) {
+                            controleDeNavegacao.popBackStack()
+                        }
+                    }
+                    .background(Color.White, shape = RoundedCornerShape(20.dp)),
+                colors = CardDefaults
+                    .cardColors(
+                        containerColor = Color.Transparent
+                    )
+            ){
+                Image(
+                    painterResource(R.drawable.botaob),
+                    contentDescription = "Logo",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(50.dp)
+                )
+            }
             Column(
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
@@ -83,120 +100,83 @@ fun Contatos(controleDeNavegacao: NavHostController) {
                     color = Color(0xFF3A3A3A)
                 )
 
-                Row (
+                Card (
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 20.dp)
-                ){
-                    Image(
-                        painterResource(R.drawable.usuario),
-                        contentDescription = "Logo",
-                        contentScale = ContentScale.Crop,
+                        .clickable {
+                            controleDeNavegacao.navigate("chatScreen")
+                        }
+                        .padding(top = 16.dp)
+                        .background(Color.White, shape = RoundedCornerShape(20.dp)),
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ) {
+                    Row (
                         modifier = Modifier
-                            .size(50.dp)
-                    )
-                    Column (
-                        verticalArrangement = Arrangement.SpaceEvenly,
-                        modifier = Modifier
-                            .padding(start = 10.dp)
-                            .height(50.dp)
+                            .fillMaxWidth()
                     ){
-                        Text(
-                            text = "Pedro",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.SemiBold
+                        Image(
+                            painterResource(R.drawable.usuario),
+                            contentDescription = "Logo",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(50.dp)
                         )
-                        Text(
-                            text = "Sei lá o que ponto ponto ponto",
-                            fontSize = 14.sp,
-                        )
+                        Column (
+                            verticalArrangement = Arrangement.SpaceEvenly,
+                            modifier = Modifier
+                                .padding(start = 10.dp)
+                                .height(50.dp)
+                        ){
+                            Text(
+                                text = "Transporta Web",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                            Text(
+                                text = "Certo, pode seguir.",
+                                fontSize = 14.sp,
+                            )
+                        }
                     }
                 }
-                Row (
+                Card (
                     modifier = Modifier
-                        .fillMaxWidth()
                         .padding(top = 16.dp)
-                ){
-                    Image(
-                        painterResource(R.drawable.usuario),
-                        contentDescription = "Logo",
-                        contentScale = ContentScale.Crop,
+                        .background(Color.White, shape = RoundedCornerShape(20.dp)),
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ) {
+                    Row (
                         modifier = Modifier
-                            .size(50.dp)
-                    )
-                    Column (
-                        verticalArrangement = Arrangement.SpaceEvenly,
-                        modifier = Modifier
-                            .padding(start = 10.dp)
-                            .height(50.dp)
+                            .fillMaxWidth()
                     ){
-                        Text(
-                            text = "Pedro",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.SemiBold
+                        Image(
+                            painterResource(R.drawable.usuario),
+                            contentDescription = "Logo",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(50.dp)
                         )
-                        Text(
-                            text = "Sei lá o que ponto ponto ponto",
-                            fontSize = 14.sp,
-                        )
-                    }
-                }
-                Row (
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                ){
-                    Image(
-                        painterResource(R.drawable.usuario),
-                        contentDescription = "Logo",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(50.dp)
-                    )
-                    Column (
-                        verticalArrangement = Arrangement.SpaceEvenly,
-                        modifier = Modifier
-                            .padding(start = 10.dp)
-                            .height(50.dp)
-                    ){
-                        Text(
-                            text = "Pedro",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Text(
-                            text = "Sei lá o que ponto ponto ponto",
-                            fontSize = 14.sp,
-                        )
-                    }
-                }
-                Row (
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                ){
-                    Image(
-                        painterResource(R.drawable.usuario),
-                        contentDescription = "Logo",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(50.dp)
-                    )
-                    Column (
-                        verticalArrangement = Arrangement.SpaceEvenly,
-                        modifier = Modifier
-                            .padding(start = 10.dp)
-                            .height(50.dp)
-                    ){
-                        Text(
-                            text = "Pedro",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Text(
-                            text = "Sei lá o que ponto ponto ponto",
-                            fontSize = 14.sp,
-                        )
+                        Column (
+                            verticalArrangement = Arrangement.SpaceEvenly,
+                            modifier = Modifier
+                                .padding(start = 10.dp)
+                                .height(50.dp)
+                        ){
+                            Text(
+                                text = "DHL",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.SemiBold
+                            )
+                            Text(
+                                text = "Tente chegar antes da noite.",
+                                fontSize = 14.sp,
+                            )
+                        }
                     }
                 }
             }
@@ -208,81 +188,129 @@ fun Contatos(controleDeNavegacao: NavHostController) {
                     color = Color(0xFFFFFFFF), shape =
                     RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp)
                 )
-        ){
-            Row (
+        ) {
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
                     .padding(start = 20.dp, top = 10.dp, end = 20.dp),
                 horizontalArrangement = Arrangement.SpaceAround
-            ){
-                Column (
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ){
-                    Image(
-                        painterResource(R.drawable.home),
-                        contentDescription = "Home",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(42.dp)
-                            .padding(start = 0.dp)
-                    )
-                    Text(
-                        text = "Home",
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFFF61221)
-                    )
+            ) {
+                Card(
+                    modifier = Modifier
+                        .clickable {
+                            controleDeNavegacao.navigate("homeMotorista")
+                        }
+                        .background(Color.White, shape = RoundedCornerShape(20.dp)),
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Image(
+                            painterResource(R.drawable.home),
+                            contentDescription = "Home",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(42.dp)
+                                .padding(start = 0.dp)
+                        )
+                        Text(
+                            text = "Home",
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xFFF61221)
+                        )
+                    }
                 }
-                Column (
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ){
-                    Image(
-                        painterResource(R.drawable.caminhao),
-                        contentDescription = "Caminhao",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(40.dp)
-                            .padding(start = 0.dp)
-                    )
-                    Text(
-                        text = "Viagens",
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFFF61221)
-                    )
+                Card(
+                    modifier = Modifier
+                        .clickable {
+                            controleDeNavegacao.navigate("telaViagens")
+                        }
+                        .background(Color.White, shape = RoundedCornerShape(20.dp)),
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Image(
+                            painterResource(R.drawable.caminhao),
+                            contentDescription = "Caminhao",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(40.dp)
+                                .padding(start = 0.dp)
+                        )
+                        Text(
+                            text = "Viagens",
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xFFF61221)
+                        )
+                    }
                 }
-                Column (
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ){
-                    Image(
-                        painterResource(R.drawable.chat),
-                        contentDescription = "Chat",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(40.dp)
-                            .padding(start = 0.dp)
-                    )
-                    Text(
-                        text = "Chat",
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFFF61221)
-                    )
+                Card(
+                    modifier = Modifier
+                        .clickable {
+                            controleDeNavegacao.navigate("contatos")
+                        }
+                        .background(Color.White, shape = RoundedCornerShape(20.dp)),
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Image(
+                            painterResource(R.drawable.chat),
+                            contentDescription = "Chat",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(40.dp)
+                                .padding(start = 0.dp)
+                        )
+                        Text(
+                            text = "Chat",
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xFFF61221)
+                        )
+                    }
                 }
-                Column (
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ){
-                    Image(
-                        painterResource(R.drawable.perfil),
-                        contentDescription = "Perfil",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .size(42.dp)
-                            .padding(start = 0.dp)
-                    )
-                    Text(
-                        text = "Perfil",
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color(0xFFF61221)
-                    )
+                Card(
+                    modifier = Modifier
+                        .clickable {
+                            controleDeNavegacao.navigate("perfilMotorista")
+                        }
+                        .background(Color.White, shape = RoundedCornerShape(20.dp)),
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+                        Image(
+                            painterResource(R.drawable.perfil),
+                            contentDescription = "Perfil",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .size(42.dp)
+                                .padding(start = 0.dp)
+                        )
+                        Text(
+                            text = "Perfil",
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color(0xFFF61221)
+                        )
+                    }
                 }
             }
         }

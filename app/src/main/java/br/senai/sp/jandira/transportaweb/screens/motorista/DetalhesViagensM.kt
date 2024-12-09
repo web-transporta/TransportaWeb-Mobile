@@ -3,6 +3,7 @@ package br.senai.sp.jandira.transportaweb.screens.motoristas
 import android.view.Surface
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -50,16 +51,26 @@ fun DetalhesViagensM(controleDeNavegacao: NavHostController) {
                     .fillMaxWidth()
                     .padding(top = 15.dp, start = 25.dp, end = 25.dp)
             ){
-                Button(
+                Card (
                     modifier = Modifier
-                        .size(46.dp)
-                        .padding(0.dp),
-                    shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults
-                        .buttonColors(Color(0xFFF61221)),
-                    onClick = {}
-                ) {
-
+                        .clickable {
+                            if (controleDeNavegacao.previousBackStackEntry != null) {
+                                controleDeNavegacao.popBackStack()
+                            }
+                        }
+                        .background(Color.White, shape = RoundedCornerShape(20.dp)),
+                    colors = CardDefaults
+                        .cardColors(
+                            containerColor = Color.Transparent
+                        )
+                ){
+                    Image(
+                        painterResource(R.drawable.botaov),
+                        contentDescription = "Logo",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(50.dp)
+                    )
                 }
                 Card (
                     modifier = Modifier

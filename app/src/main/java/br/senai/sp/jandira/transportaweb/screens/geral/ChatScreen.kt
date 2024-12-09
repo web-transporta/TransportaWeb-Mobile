@@ -2,6 +2,7 @@ package br.senai.sp.jandira.transportaweb.screens.geral
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
@@ -44,13 +47,27 @@ fun ChatSreen(controleDeNavegacao: NavHostController) {
             .fillMaxWidth()
             .padding(top = 40.dp)
     ) {
-        Image(
-            painterResource(R.drawable.arrow),
-            contentDescription = "Logo",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(50.dp)
-        )
+       Card (
+           modifier = Modifier
+               .clickable {
+                   if (controleDeNavegacao.previousBackStackEntry != null) {
+                       controleDeNavegacao.popBackStack()
+                   }
+               }
+               .background(Color.Transparent, shape = RoundedCornerShape(20.dp)),
+           colors = CardDefaults
+               .cardColors(
+                   containerColor = Color.Transparent
+               )
+       ){
+           Image(
+               painterResource(R.drawable.arrow),
+               contentDescription = "Logo",
+               contentScale = ContentScale.Crop,
+               modifier = Modifier
+                   .size(50.dp)
+           )
+       }
         Image(
             painterResource(R.drawable.usuario),
             contentDescription = "Logo",
@@ -65,7 +82,7 @@ fun ChatSreen(controleDeNavegacao: NavHostController) {
                 .height(50.dp)
         ) {
             Text(
-                text = "Pedro",
+                text = "Transporta Web",
                 fontSize = 16.sp,
                 color = Color.White
 
@@ -98,15 +115,15 @@ fun ChatSreen(controleDeNavegacao: NavHostController) {
                ){
                    Box(
                        modifier = Modifier
-                           .width(186.dp)
-                           .height(48.dp)
+                           .width(266.dp)
+                           .height(85.dp)
                            .background(
                                color = Color(0xFFC00000), shape =
                                RoundedCornerShape(topEnd = 12.dp, topStart = 12.dp, bottomStart = 12.dp)
                            )
                    ){
                        Text(
-                           text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                           text = "Bom dia, estou a caminho do ponto de coleta. Previsão de chegada em 30 minutos.",
                            color = Color.White,
                            modifier = Modifier
                                .padding(5.dp)
@@ -121,15 +138,15 @@ fun ChatSreen(controleDeNavegacao: NavHostController) {
                ){
                    Box(
                        modifier = Modifier
-                           .width(186.dp)
-                           .height(48.dp)
+                           .width(266.dp)
+                           .height(110.dp)
                            .background(
                                color = Color(0xFF868686), shape =
                                RoundedCornerShape(topEnd = 12.dp, topStart = 12.dp, bottomStart = 12.dp)
                            )
                    ){
                        Text(
-                           text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                           text = "Bom dia! Perfeito. Assim que chegar, envie uma mensagem para confirmar e aguardaremos o status da coleta.",
                            color = Color.White,
                            modifier = Modifier
                                .padding(5.dp)
@@ -144,15 +161,15 @@ fun ChatSreen(controleDeNavegacao: NavHostController) {
                ){
                    Box(
                        modifier = Modifier
-                           .width(186.dp)
-                           .height(48.dp)
+                           .width(266.dp)
+                           .height(110.dp)
                            .background(
                                color = Color(0xFFC00000), shape =
                                RoundedCornerShape(topEnd = 12.dp, topStart = 12.dp, bottomStart = 12.dp)
                            )
                    ){
                        Text(
-                           text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                           text = "Cheguei ao destino e a descarga já começou. Preciso aguardar alguma assinatura ou posso seguir depois de descarregar?",
                            color = Color.White,
                            modifier = Modifier
                                .padding(5.dp)
@@ -165,22 +182,6 @@ fun ChatSreen(controleDeNavegacao: NavHostController) {
                        .fillMaxWidth()
                        .padding(top = 4.dp)
                ){
-                   Box(
-                       modifier = Modifier
-                           .width(186.dp)
-                           .height(48.dp)
-                           .background(
-                               color = Color(0xFFC00000), shape =
-                               RoundedCornerShape(topEnd = 12.dp, topStart = 12.dp, bottomStart = 12.dp)
-                           )
-                   ){
-                       Text(
-                           text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                           color = Color.White,
-                           modifier = Modifier
-                               .padding(5.dp)
-                       )
-                   }
                    Column (
                        horizontalAlignment = Alignment.Start,
                        modifier = Modifier
@@ -189,15 +190,15 @@ fun ChatSreen(controleDeNavegacao: NavHostController) {
                    ){
                        Box(
                            modifier = Modifier
-                               .width(186.dp)
-                               .height(48.dp)
+                               .width(158.dp)
+                               .height(36.dp)
                                .background(
                                    color = Color(0xFF868686), shape =
                                    RoundedCornerShape(topEnd = 12.dp, topStart = 12.dp, bottomStart = 12.dp)
                                )
                        ){
                            Text(
-                               text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                               text = "Certo, pode seguir.",
                                color = Color.White,
                                modifier = Modifier
                                    .padding(5.dp)
